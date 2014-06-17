@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+	
+	<layout version="0.1.0">
+		
+        <!-- Customer account pages, rendered for all tabs in dashboard -->
+
+
+        <!--<customer_logged_in>
+            <reference name="right">
+                <block type="sales/reorder_sidebar" name="sale.reorder.sidebar" as="reorder" template="sales/reorder/sidebar.phtml"/>
+            </reference>
+        </customer_logged_in>-->
+        <checkout_onepage_index>
+            <remove name="sale.reorder.sidebar"/>
+        </checkout_onepage_index>
+        <checkout_onepage_reorder>
+            <reference name="right">
+                <action method="unsetChild"><name>reorder</name></action>
+            </reference>
+        </checkout_onepage_reorder>
+
+        <customer_account>
+            <!-- Mage_Sales -->
+            <reference name="customer_account_navigation">
+                <action method="addLink" translate="label" module="sales"><name>library</name><path>mylibrary/index/index/</path><label>My Library</label></action>
+            </reference>
+        </customer_account>
+
+        <!--
+        Customer account home dashboard layout
+        -->
+
+        <customer_account_index>
+            <!-- Mage_Sales -->
+            <!--remove name="customer_account_dashboard_top"/-->
+            <reference name="customer_account_dashboard">
+                <block type="sales/order_recent" name="customer_account_dashboard_top" as="top" template="sales/order/recent.phtml"/>
+            </reference>
+        </customer_account_index>
+
+		<mylibrary_index_index> 
+            <update handle="customer_account"/>
+        	<reference name="content">
+            	<block type="mylibrary/mylibrary" name="mylibrary" template="mylibrary/mylibrary.phtml"/>
+        	</reference>
+		</mylibrary_index_index>
+		
+        
+        <mylibrary_reader_index>
+	    <reference name="root">
+				<action method="setTemplate"><template>page/blank.phtml</template></action>
+       	 	</reference>
+			<reference name="content">
+            	<block type="page/html" name="reader" template="mylibrary/reader.phtml"/>
+        	</reference>
+        </mylibrary_reader_index>
+	
+	<mylibrary_reader_demo>
+	    <reference name="root">
+				<action method="setTemplate"><template>page/blank.phtml</template></action>
+       	 	</reference>
+			<reference name="content">
+            	<block type="page/html" name="reader" template="mylibrary/demo.phtml"/>
+        	</reference>
+        </mylibrary_reader_demo>
+    </layout>

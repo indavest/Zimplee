@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <DS_Cloudflare>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Core/>
+                <Mage_Log/>
+                <Mage_Directory/>
+                <Mage_Adminhtml/>
+            </depends>
+        </DS_Cloudflare>
+    </modules>
+</config>

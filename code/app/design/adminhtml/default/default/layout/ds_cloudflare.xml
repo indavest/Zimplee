@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <adminhtml_customer_edit>
+        <reference name="customer_edit_tab_view">
+            <remove name="sales" />
+            <action method="setTemplate"><template>ds/cloudflare/customer/tab/view.phtml</template></action>
+        </reference>
+    </adminhtml_customer_edit>
+</layout>

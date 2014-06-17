@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<config> 
+	<global>
+		<modules>
+                <zim_home>
+                        <version>0.1.0</version>
+                </zim_home>
+        </modules>
+		
+		 <blocks>
+            <home>
+                <rewrite>						
+						<home>ZIM_Home_Block_Home</home>
+				</rewrite>
+            </home>
+		</blocks> 
+		
+		<models>
+            <mylibrary>
+                <class>ZIM_Home_Model</class>
+                <resourceModel>home_mysql4</resourceModel>
+            </mylibrary>
+            <mylibrary_mysql4>
+                <class>ZIM_Home_Model_Mysql4</class>
+                <entities>
+                    <attributefilterflat>
+                        <table>attribute_filter_flat</table>
+                    </attributefilterflat>
+		        </entities>
+            </mylibrary_mysql4>
+        </models>
+        
+	</global>	
+		 <frontend>
+                <routers>
+                        <home> 
+                                <use>standard</use>
+                                <args>
+                                        <module>ZIM_Home</module>
+                                        <frontName>home</frontName>
+                                </args>
+                        </home>
+                </routers>
+				<layout>
+					<updates>
+						<home>
+							<file>home.xml</file>
+						</home>
+					</updates>
+				</layout>
+        </frontend>
+		
+</config>

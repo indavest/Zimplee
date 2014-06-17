@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<config>
+
+    <modules>
+        <DS_Cloudflare>
+            <version>1.0.0</version>
+        </DS_Cloudflare>
+    </modules>
+
+    <global>
+        <remote_addr_headers>
+            <cf_connecting_ip>HTTP_CF_CONNECTING_IP</cf_connecting_ip>
+            <x_forwarded_for>HTTP_X_FORWARDED_FOR</x_forwarded_for>
+        </remote_addr_headers>
+
+        <helpers>
+            <ds_cloudflare>
+                <class>DS_Cloudflare_Helper</class>
+            </ds_cloudflare>
+        </helpers>
+
+        <blocks>
+            <adminhtml>
+                <rewrite>
+                    <customer_edit_tab_view>DS_Cloudflare_Block_Adminhtml_Customer_Edit_Tab_View</customer_edit_tab_view>
+                    <customer_online_grid>DS_Cloudflare_Block_Adminhtml_Customer_Online_Grid</customer_online_grid>
+                </rewrite>
+            </adminhtml>
+            <ds_cloudflare>
+                <class>DS_Cloudflare_Block</class>
+            </ds_cloudflare>
+        </blocks>
+
+        <models>
+            <ds_cloudflare>
+                <class>DS_Cloudflare_Model</class>
+            </ds_cloudflare>
+            <log>
+                <rewrite>
+                    <visitor>DS_Cloudflare_Model_Log_Visitor</visitor>
+                </rewrite>
+            </log>
+            <log_resource>
+                <rewrite>
+                    <customer>DS_Cloudflare_Model_Log_Resource_Customer</customer>
+                    <visitor>DS_Cloudflare_Model_Log_Resource_Visitor</visitor>
+                    <visitor_online>DS_Cloudflare_Model_Log_Resource_Visitor_Online</visitor_online>
+                </rewrite>
+            </log_resource>
+        </models>
+
+        <resources>
+            <ds_cloudflare_setup>
+                <setup>
+                    <module>DS_Cloudflare</module>
+                    <class>Mage_Core_Model_Resource_Setup</class>
+                </setup>
+                <connection><use>core_setup</use></connection>
+            </ds_cloudflare_setup>
+        </resources>
+    </global>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <ds_cloudflare>
+                    <file>ds_cloudflare.xml</file>
+                </ds_cloudflare>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <DS_Cloudflare>
+                    <files>
+                        <default>DS_Cloudflare.csv</default>
+                    </files>
+                </DS_Cloudflare>
+            </modules>
+        </translate>
+    </adminhtml>
+
+</config>

@@ -1,0 +1,119 @@
+<?php
+    $_product = $this->getProduct();
+    $customerData = Mage::getSingleton('customer/session')->getCustomer();
+    $libraryCollection = Mage::getModel('mylibrary/mylibrary')->getCollection()
+                        ->addFieldToFilter('customer_id', $customerData->getId())
+			->addFieldToFilter('product_id', $_product->getId());
+    $productInLibrary = false;
+    if($libraryCollection->getSize()){
+	$productInLibrary = true;
+    }
+?>
+
+<?php if($_product->isSaleable()): ?>
+<div class="line"></div>
+    <span style="margin-bottom:10px;float:left;width:230px;">Rental Period (months)</span>
+    <div class="add-to-cart">
+        <?php if(!$_product->isGrouped()): ?>
+        <div class="quanitybox">         
+            <label for="qty"><?php echo $this->__('Quantity:') ?></label>
+            <input type="button" class="quantity_box_button_down" value="-" onclick="qtyDown()" />         
+            <input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Period') ?>" class="input-text qty" />
+            <input type="button" class="quantity_box_button_up" value="+" onclick="qtyUp()" />
+        </div>
+        
+        <?php endif; ?>
+                       
+        
+        
+        
+        <?php echo $this->getChildHtml('', true, true) ?>
+    </div>
+    
+    
+    <div class="box-product-buttons clearfix">
+	  <a class="buttons-cart" id="button-cart"><?php echo $this->__('Add to Cart'); ?></a>
+	  <a title="<?php echo $this->__('Add to Wish List'); ?>" class="buttons-wish" onclick="setLocation('<?php echo $this->getAddToWishlistUrl($_product) ?>')"></a>
+	  <a title="<?php echo $this->__('Add to Compare'); ?>" class="buttons-compare" onclick="setLocation('<?php echo $this->getAddToCompareUrl($_product) ?>')"></a>
+    </div>
+    
+<?php endif; ?>
+<div id="dialog-confirm" title="Add to Cart" style="display: none;">
+  <p>This item is already in your library. Still want to proceed?</p>
+</div>
+
+<script type="text/javascript">
+
+    jQuery(document).ready(function(){
+	jQuery("#button-cart").live('click', function(){
+	    if ("<?php echo $productInLibrary; ?>") {
+		alertify.confirm("This item is already in your library. Still want to proceed?", function (e) {
+			if (e) {
+				jQuery('#product_addtocart_form').submit();
+			}
+		});
+		
+		/*jQuery( "#dialog-confirm" ).dialog({
+		    resizable: false,
+		    height:200,
+		    modal: true,
+		    buttons: {
+		      "Add to Cart": function() {
+			jQuery( this ).dialog( "close" );
+			jQuery('#product_addtocart_form').submit();
+		      },
+		      Cancel: function() {
+			jQuery( this ).dialog( "close" );
+		      }
+		    }
+		});*/
+	    }else{
+		jQuery('#product_addtocart_form').submit();
+	    }
+	});
+    });
+
+    var qty_el = document.getElementById('qty'); 
+    var qty = qty_el.value; 
+    if(qty < 2){
+        jQuery('.quantity_box_button_down').css({
+            //'visibility' : 'hidden'
+        });
+    }
+    function qtyDown(){
+        var price_type = '<?php echo $_product->getData('price_type_month_or_year'); ?>';
+        if(price_type == 'QP' || price_type == 'QPA'){
+            alert('This product is available for a period 12 months');
+            return false;
+        }
+        var qty_el = document.getElementById('qty'); 
+        var qty = qty_el.value; 
+        if( qty == 2) {
+            jQuery('.quantity_box_button_down').css({
+                //'visibility' : 'hidden'
+            });
+        }
+        if( !isNaN( qty ) && qty > 1 ){
+            qty_el.value--;
+        }         
+        return false;
+    }
+    
+    function qtyUp(){
+        var price_type = '<?php echo $_product->getData('price_type_month_or_year'); ?>';
+        if(price_type == 'QP' || price_type == 'QPA'){
+            alert('This product is available for a period 12 months');
+            return false;
+        }
+        var qty_el = document.getElementById('qty'); 
+        var qty = qty_el.value; 
+        if( !isNaN( qty )) {
+            qty_el.value++;
+        }
+        jQuery('.quantity_box_button_down').css({
+            //'visibility' : 'visible'
+        });
+        return false;
+    }
+
+</script>

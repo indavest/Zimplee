@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<config> 
+	<global>
+		<modules>
+                <zim_attributeflat>
+                        <version>0.1.0</version>
+                </zim_attributeflat>
+        </modules>
+		
+		 <blocks>
+            <attributeflat>
+                <rewrite>						
+						<attributeflat>ZIM_Attributeflat_Block_Attributeflat</attributeflat>
+				</rewrite>
+            </attributeflat>
+		</blocks> 
+		<models>
+            <attributeflat>
+                <class>ZIM_Attributeflat_Model</class>
+                <resourceModel>attributeflat_mysql4</resourceModel>
+            </attributeflat>
+            <attributeflat_mysql4>
+                <class>ZIM_Attributeflat_Model_Mysql4</class>
+                <entities>
+                    <attributeflat>
+                        <table>attributeflat</table>
+                    </attributeflat>
+		        </entities>
+            </attributeflat_mysql4>
+        </models>
+	</global>	
+		 <frontend>
+                <routers>
+                        <attributeflat> 
+                                <use>standard</use>
+                                <args>
+                                        <module>ZIM_Attributeflat</module>
+                                        <frontName>attributeflat</frontName>
+                                </args>
+                        </attributeflat>
+                </routers>
+				<layout>
+					<updates>
+						<attributeflat>
+							<file>attributeflat.xml</file>
+						</attributeflat>
+					</updates>
+				</layout>
+        </frontend>
+		
+</config>

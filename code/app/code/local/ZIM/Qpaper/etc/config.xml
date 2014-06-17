@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<config> 
+	<global>
+		<modules>
+                <zim_qpaper>
+                        <version>0.1.0</version>
+                </zim_qpaper>
+        </modules>
+		
+		 <blocks>
+            <qpaper>
+                <rewrite>						
+						<qpaper>ZIM_Qpaper_Block_Qpaper</qpaper>
+				</rewrite>
+            </qpaper>
+		</blocks> 
+		
+	</global>	
+		 <frontend>
+                <routers>
+                        <qpaper> 
+                                <use>standard</use>
+                                <args>
+                                        <module>ZIM_Qpaper</module>
+                                        <frontName>qpaper</frontName>
+                                </args>
+                        </qpaper>
+                </routers>
+				<layout>
+					<updates>
+						<qpaper>
+							<file>qpaper.xml</file>
+						</qpaper>
+					</updates>
+				</layout>
+        </frontend>
+		
+</config>

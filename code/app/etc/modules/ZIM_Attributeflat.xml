@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+         <modules>
+                <ZIM_Attributeflat>
+                        <active>true</active>
+                        <codePool>local</codePool>
+                </ZIM_Attributeflat>
+         </modules>
+</config>

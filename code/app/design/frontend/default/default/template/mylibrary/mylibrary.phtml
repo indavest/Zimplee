@@ -1,0 +1,84 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php $_orders = $this->getOrders(); ?>
+<div class="page-title">
+    <h1><?php echo $this->__('My Library') ?></h1>
+</div>
+<?php
+            $customerData = Mage::getSingleton('customer/session')->getCustomer();
+            $libraryCollection = Mage::getModel('mylibrary/mylibrary')->getCollection()
+                                    ->addFieldToFilter('customer_id', $customerData->getId());
+?>
+<?php if($libraryCollection->getSize()): ?>
+
+
+<table class="data-table" id="my-orders-table">
+    <col width="1" />
+    <col width="1" />
+    <col />
+    <col width="1" />
+    <col width="1" />
+    <col width="1" />
+    <thead>
+        <tr>
+            <th></th>
+            <th style="width: 250px;"><?php echo $this->__('Title') ?></th>
+            <th><?php echo $this->__('Purchased Date') ?></th>
+            <th><?php echo $this->__('Expiry Date') ?></th>
+            <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php $_odd = ''; ?>
+        <?php 
+                foreach($libraryCollection as $_item) {
+                $_product = Mage::getModel('catalog/product')->load($_item->getProductId());
+                $_purchasedDate = date("d M Y", strtotime($_item->getPurchasedTime()));
+                $_expiry_date = date("d M Y", strtotime($_item->getExpiryTime()));
+                $enable_read = ($_product->getData('docspad_id') && strtotime($_expiry_date) >= strtotime(date("d M Y")))?1:0;    
+        ?>
+        <tr>
+            <td><img src="<?php echo $_product->getThumbnailUrl(); ?>" width="75" height="75"/></td>
+            <td><?php echo $_product->getName(); ?></td>
+            <td><?php echo $_purchasedDate;  ?></td>
+            <td><?php echo $_expiry_date; ?></td>
+            <?php if($enable_read){ ?>      
+            <td style="width: 100px;"><a href="<?php echo $this->getUrl('mylibrary/reader', array('id' => $_product->getId())) ?>" target="_blank">Read Now</a></td>
+            <?php } else { ?>
+            <td>&nbsp;</td>
+            <?php } ?>    
+        </tr>
+        <?php } ?>
+        
+        
+    </tbody>
+</table>
+<script type="text/javascript">decorateTable('my-orders-table');</script>
+<?php else: ?>
+    <p><?php echo $this->__('Your library is empty.'); ?></p>
+<?php endif ?>

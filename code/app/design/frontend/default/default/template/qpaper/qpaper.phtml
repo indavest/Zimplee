@@ -1,0 +1,44 @@
+<?php
+$university_attribute_code = "university";
+$attribute_details = Mage::getSingleton("eav/config")->getAttribute("catalog_product", $university_attribute_code);
+$universityOptions = $attribute_details->getSource()->getAllOptions(false);
+$degree_attribute_code = "degree";
+$attribute_details = Mage::getSingleton("eav/config")->getAttribute("catalog_product", $degree_attribute_code);
+$degreeOptions = $attribute_details->getSource()->getAllOptions(false);
+?>
+<div>
+    <div style="width:300px;height:500px;float:left;padding:100px;">
+        <strong> BY Students,</strong><br />
+        <strong> FOR Students</strong><br />
+        ......
+    </div>
+    <div style="float:left;" id="qsearch">
+        <form action="<?php echo $this->getUrl('question-papers.html') ?>" method="GET">
+        <div>
+            <label>Select University: </label>
+            <select name="<?php echo $university_attribute_code ?>">
+                <option value="">Select University</option>
+              <?php
+                foreach($universityOptions as $universityOption) 
+                { 
+                    echo "<option value='{$universityOption['value']}'>{$universityOption['label']}</option>";      
+                }
+              ?>
+            </select>
+        </div>
+        <div>
+            <label>Select Degree: </label>
+            <select name="<?php echo $degree_attribute_code ?>">
+                <option value="">Select Degree</option>
+              <?php
+                foreach($degreeOptions as $degreeOption) 
+                { 
+                    echo "<option value='{$degreeOption['value']}'>{$degreeOption['label']}</option>";      
+                }
+              ?>
+            </select>
+        </div>
+        <button type="submit" class="button"><span>Search</span></button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,254 @@
+<?php
+$university_attribute_code = "university";
+$attribute_details = Mage::getSingleton("eav/config")->getAttribute("catalog_product", $university_attribute_code);
+$universityOptions = $attribute_details->getSource()->getAllOptions(false);
+$degree_attribute_code = "degree";
+$attribute_details = Mage::getSingleton("eav/config")->getAttribute("catalog_product", $degree_attribute_code);
+$degreeOptions = $attribute_details->getSource()->getAllOptions(false);
+$subject_attribute_code = "subject";
+$attribute_details = Mage::getSingleton("eav/config")->getAttribute("catalog_product", $subject_attribute_code);
+$subjectOptions = $attribute_details->getSource()->getAllOptions(false);
+$year_attribute_code = "degree_year";
+$attribute_details = Mage::getSingleton("eav/config")->getAttribute("catalog_product", $year_attribute_code);
+$yearOptions = $attribute_details->getSource()->getAllOptions(false);
+$semester_attribute_code = "degree_semester";
+$attribute_details = Mage::getSingleton("eav/config")->getAttribute("catalog_product", $semester_attribute_code);
+$semesterOptions = $attribute_details->getSource()->getAllOptions(false);
+
+$layer = Mage::getModel("catalog/layer");
+    $category = Mage::getModel("catalog/category")->load(7);
+    $layer->setCurrentCategory($category);
+    $attributes = $layer->getFilterableAttributes();
+
+    foreach ($attributes as $attribute) {
+        
+        $filterBlockName = 'catalog/layer_filter_attribute';
+        
+        $result = $this->getLayout()->createBlock($filterBlockName)->setLayer($layer)->setAttributeModel($attribute)->init();
+        if($attribute->getAttributeCode() == "subject"){
+            $subjectOptions = $result->getItems();
+        }elseif($attribute->getAttributeCode() == "degree_semester"){
+            $semesterOptions = $result->getItems();
+        }elseif($attribute->getAttributeCode() == "degree"){
+            $degreeOptions = $result->getItems();
+        }elseif($attribute->getAttributeCode() == "university"){
+            $universityOptions = $result->getItems();
+        }
+        
+}
+?>
+
+<div>
+    <div class="module-box">
+        <h2>The Holy Grail</h2>
+        <div class="box-heading module">QUESTION PAPERS OF PREVIOUS YEARS</div>
+        <div class="std">Want access to all the exam questions asked previously? They are all right here! Pick your University, choose your course and access this invaluable database of question papers for all your subjects!</div>
+        <div class="clear"/>
+            <p/>
+        </div>
+        <div class="qsearch">
+            <form action="<?php echo $this->getUrl('questionpapers.html') ?>" method="GET">
+                <p>
+                    <select name="<?php echo $university_attribute_code ?>" class="select-large universityChangeAction">
+                        <option value="">Select your university</option>
+                      <?php
+                        foreach($universityOptions as $universityOption) 
+                        { 
+                            echo "<option value='{$universityOption['value']}'>{$universityOption['label']}</option>";      
+                        }
+                      ?>
+                    </select>
+                </p>
+                <p>
+                    <select name="<?php echo $degree_attribute_code ?>" class="select-large changeAction degreeChangeAction" disabled style="margin-left:20px;">
+                        <option value="">Select your degree</option>
+                      <?php
+                        foreach($degreeOptions as $degreeOption) 
+                        { 
+                            echo "<option value='{$degreeOption['value']}'>{$degreeOption['label']}</option>";      
+                        }
+                      ?>
+                    </select>
+                    <label id="deg_loader" style="visibility: hidden;"><img src="<?php echo $this->getSkinUrl('images/ajax-loader-24.gif'); ?>" /></label>
+                </p>
+                <p>
+                    <select name="<?php echo $semester_attribute_code ?>" class="select-large changeAction semesterChangeAction" disabled style="margin-left:20px;">
+                        <option value="">Select your degree semester/year</option>
+                      <?php
+                        foreach($semesterOptions as $semesterOption) 
+                        { 
+                            echo "<option value='{$semesterOption['value']}'>{$semesterOption['label']}</option>";      
+                        }
+                      ?>
+                    </select>
+                    <label id="sem_loader" style="visibility: hidden;"><img src="<?php echo $this->getSkinUrl('images/ajax-loader-24.gif'); ?>" /></label>
+                </p>
+                <p>
+                    <select name="<?php echo $subject_attribute_code ?>" class="select-large subjectChangeAction" disabled style="margin-left:20px;">
+                        <option value="">Select your subject</option>
+                      <?php
+                        foreach($subjectOptions as $subjectOption) 
+                        { 
+                            echo "<option value='{$subjectOption['value']}'>{$subjectOption['label']}</option>";      
+                        }
+                      ?>
+                    </select>
+                    <label id="sub_loader" style="visibility: hidden;"><img src="<?php echo $this->getSkinUrl('images/ajax-loader-24.gif'); ?>" /></label>
+                </p>
+                <button type="submit" class="button"><span>Search</span></button>
+                <p>or<br />
+                <a href="<?php echo $this->getUrl('questionpapers.html') ?>">browse all</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+const degreeSource = jQuery("select[name=degree]").html();
+const degreeSemesterSource = jQuery("select[name=degree_semester]").html();
+const subjectSource = jQuery("select[name=subject]").html();
+jQuery(document).ready(function(){
+    /*jQuery(".changeAction").live('change',function(){
+        
+        jQuery.ajax({
+        url: '<?php echo $this->getUrl('home/questionpapers/getAttributes'); ?>',
+        data: 'university='+jQuery("select[name=university]").val()+"&degree="+jQuery("select[name=degree]").val()+"&degree_semester="+jQuery("select[name=degree_semester]").val()+"&subject="+jQuery("select[name=subject]").val(),
+        dataType: 'JSON',
+        success: function(result){
+            if(result["success"]){
+                var semesterList = result["data"][0].toString();
+                var semesterArray = semesterList.split(',');
+                var degreeList = result["data"][1].toString();
+                var degreeArray = degreeList.split(',');
+                var subjectList = result["data"][2].toString();
+                var subjectArray = subjectList.split(',');
+                if(jQuery("select[name=degree_semester]").val() == ""){
+                    jQuery("select[name=degree_semester] option:not(:first)").each(function(){
+                    jQuery(this).hide();
+                    if(jQuery.inArray(jQuery(this).attr('value'), semesterArray) != -1){
+                        jQuery(this).show();  
+                    }
+                    jQuery
+                });
+                }
+                if(jQuery("select[name=degree]").val() == ""){
+                    jQuery("select[name=degree] option:not(:first)").each(function(){
+                        jQuery(this).hide();
+                        if(jQuery.inArray(jQuery(this).attr('value'), degreeArray) != -1){
+                            jQuery(this).show();  
+                        }
+                    });
+                }
+                
+                if(jQuery("select[name=subject]").val() == ""){
+                    jQuery("select[name=subject] option:not(:first)").each(function(){
+                        jQuery(this).hide();
+                        if(jQuery.inArray(jQuery(this).attr('value'), subjectArray) != -1){
+                            jQuery(this).show();  
+                        }
+                    });                    
+                }
+            }
+        }
+        
+    });        
+    });*/
+    jQuery(".universityChangeAction").live('change', function(){
+        if (jQuery("select[name=university]").val() != "") {
+            jQuery("select[name=degree]").removeAttr("disabled");
+            jQuery("#deg_loader").css('visibility', 'visible');
+            jQuery.ajax({
+                url: '<?php echo $this->getUrl('home/questionpapers/getAttributes'); ?>',
+                data: 'university='+jQuery("select[name=university]").val()+"&degree="+jQuery("select[name=degree]").val()+"&degree_semester="+jQuery("select[name=degree_semester]").val()+"&subject="+jQuery("select[name=subject]").val(),
+                dataType: 'JSON',
+                success: function(result){
+                	jQuery("#deg_loader").css('visibility', 'hidden');
+                    var degreeList = result["data"][1].toString();
+                    var degreeArray = degreeList.split(',');
+                    jQuery("select[name=degree] option:not(:first)").each(function(){
+                        jQuery(this).hide();
+                        if(jQuery.inArray(jQuery(this).attr('value'), degreeArray) != -1){
+                            jQuery(this).show();  
+                        }
+                    });
+                    
+                }
+            });
+        }else{
+            jQuery("select[name=degree]").val("").prop('disabled', 'disabled');
+            jQuery("select[name=degree_semester]").val("").prop('disabled', 'disabled');
+            jQuery("select[name=subject]").val("").prop('disabled', 'disabled');
+        }
+    });
+    
+    jQuery(".degreeChangeAction").live('change', function(){
+        if (jQuery("select[name=degree]").val() != "") {
+            jQuery("select[name=degree_semester]").removeAttr("disabled");
+            jQuery("#sem_loader").css('visibility', 'visible');
+            jQuery.ajax({
+                url: '<?php echo $this->getUrl('home/questionpapers/getAttributes'); ?>',
+                data: 'university='+jQuery("select[name=university]").val()+"&degree="+jQuery("select[name=degree]").val()+"&degree_semester="+jQuery("select[name=degree_semester]").val()+"&subject="+jQuery("select[name=subject]").val(),
+                dataType: 'JSON',
+                success: function(result){
+                    jQuery("#sem_loader").css('visibility', 'hidden');
+                    var semesterList = result["data"][0].toString();
+                    var semesterArray = semesterList.split(',');
+                    //remove all options select box
+					jQuery("select[name=degree_semester]").children().remove();
+					//copy all options from source to select box
+					jQuery("select[name=degree_semester]").html(degreeSemesterSource);
+					//remove elements not required
+					jQuery("select[name=degree_semester] option:not(:first)").each(function(){
+                        if(jQuery.inArray(jQuery(this).attr('value'), semesterArray) != -1){
+                            jQuery(this).show();
+                        }else{
+							jQuery(this).remove();
+						}
+                    });
+				}
+            });
+        }else{
+            jQuery("select[name=degree_semester]").val("").prop('disabled', 'disabled');
+            jQuery("select[name=subject]").val("").prop('disabled', 'disabled');
+        }
+    });
+    
+    jQuery(".semesterChangeAction").live('change', function(){
+        if (jQuery("select[name=degree_semester]").val() != "") {
+            jQuery("select[name=subject]").removeAttr("disabled");
+            jQuery("#sub_loader").css('visibility', 'visible');
+            jQuery.ajax({
+                url: '<?php echo $this->getUrl('home/questionpapers/getAttributes'); ?>',
+                data: 'university='+jQuery("select[name=university]").val()+"&degree="+jQuery("select[name=degree]").val()+"&degree_semester="+jQuery("select[name=degree_semester]").val()+"&subject="+jQuery("select[name=subject]").val(),
+                dataType: 'JSON',
+                success: function(result){
+                    jQuery("#sub_loader").css('visibility', 'hidden');
+                    var subjectList = result["data"][2].toString();
+                    var subjectArray = subjectList.split(',');
+                    /*jQuery("select[name=subject] option:not(:first)").each(function(){
+                        jQuery(this).hide();
+                        if(jQuery.inArray(jQuery(this).attr('value'), subjectArray) != -1){
+                            jQuery(this).css("display","block");  
+                        }
+                    });*/
+					 //remove all options select box
+					jQuery("select[name=subject]").children().remove();
+					//copy all options from source to select box
+					jQuery("select[name=subject]").html(subjectSource);
+					//remove elements not required
+					jQuery("select[name=subject] option:not(:first)").each(function(){
+                        if(jQuery.inArray(jQuery(this).attr('value'), subjectArray) != -1){
+                            jQuery(this).show();
+                        }else{
+							jQuery(this).remove();
+						}
+                    });
+                }
+            });
+        }else{
+            jQuery("select[name=subject]").val("").prop('disabled', 'disabled');
+        }
+    });
+});
+</script>

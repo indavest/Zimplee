@@ -1,0 +1,80 @@
+<?php if(themeOptions('facebookgroupid')<>''): ?>
+<div class="widget_facebook_right">
+<div id="facebook_icon"></div>
+<div class="facebook_box">
+  <script src="//connect.facebook.net/en_US/all.js#xfbml=1"></script>
+  <fb:fan profile_id="<?php echo themeOptions('facebookgroupid');?>" stream="0" connections="16" logobar="0" width="237" height="389"></fb:fan>  
+</div>
+</div>
+<?php endif; ?>
+
+<?php if(Mage::getModel('cms/block')->load('shop_custom_block')->getIsActive()): ?>
+<div class="widget_custom_box_left">
+<div id="custom_box_icon"></div>
+<div class="custom_box">
+
+<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('shop_custom_block')->toHtml(); ?>
+
+</div>
+</div>
+<?php endif; ?>
+
+<div id="top"></div>
+<div class="header-container">
+    <div class="header">
+        
+        <div class="header-left">
+            <?php if ($this->getIsHomePage()):?>
+            <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+            <?php else:?>
+            <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+            <?php endif?>
+        </div> 
+        
+        <div class="header-right">
+            <div class="header-sample" >
+                <a id="button_style" href="<?php echo $this->getUrl('mylibrary/reader/demo')?>" target="_blank"><span>TRY A SAMPLE</span></a>
+            </div>          
+            <div id="header_menu" class="clearfix">				
+				<!-- cart -->
+					<div class="minicart-wrapper">				
+						<div class="minicart">							
+							<?php echo $this->getChildHtml('top_cart') ?>							
+						</div>
+						<div class="icon" onclick="location.href='<?php echo $this->getUrl('checkout/cart')?>'"></div>
+					</div>
+			   <!-- / cart -->
+			   <?php echo $this->getChildHtml('topLinks') ?><?php echo $this->getChildHtml('currency') ?><?php echo $this->getChildHtml('store_language') ?>
+             </div>
+			 <div class="clear"></div>
+			 <div class="welcome-msg"><?php echo $this->getWelcome() ?></div>            
+        </div>
+        <div class="header-bottom">
+		  <?php echo $this->getChildHtml('topMenu') ?>
+		   <!-- search -->
+		     <?php echo $this->getChildHtml('topBar') ?>    
+		   <!-- / search -->
+        </div>		
+    </div>
+    <?php echo $this->getChildHtml('topContainer'); ?>
+</div>
+</div><? // class=page ?>
+
+
+<?php
+$routeName = Mage::app()->getRequest()->getRouteName();  
+$identifier = Mage::getSingleton('cms/page')->getIdentifier();  
+$mainclass = '';
+
+if($routeName == 'cms' && $identifier == 'home') {  
+    echo $this->getLayout()->createBlock('cms/block')->setBlockId('revolution_slider')->toHtml();
+    $mainclass = ' home';
+} else {  
+    $mainclass = '';
+} 
+?>
+
+
+
+<div class="page<?php echo $mainclass; ?>">
+    <?php echo $this->getChildHtml('topBread') ?>

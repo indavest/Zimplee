@@ -1,0 +1,80 @@
+<?php
+$university_attribute_code = "university";
+$attribute_details = Mage::getSingleton("eav/config")->getAttribute("catalog_product", $university_attribute_code);
+$universityOptions = $attribute_details->getSource()->getAllOptions(false);
+$degree_attribute_code = "degree";
+$attribute_details = Mage::getSingleton("eav/config")->getAttribute("catalog_product", $degree_attribute_code);
+$degreeOptions = $attribute_details->getSource()->getAllOptions(false);
+$subject_attribute_code = "subject";
+$attribute_details = Mage::getSingleton("eav/config")->getAttribute("catalog_product", $subject_attribute_code);
+$subjectOptions = $attribute_details->getSource()->getAllOptions(false);
+$year_attribute_code = "degree_year";
+$attribute_details = Mage::getSingleton("eav/config")->getAttribute("catalog_product", $year_attribute_code);
+$yearOptions = $attribute_details->getSource()->getAllOptions(false);
+$semester_attribute_code = "degree_semester";
+$attribute_details = Mage::getSingleton("eav/config")->getAttribute("catalog_product", $semester_attribute_code);
+$semesterOptions = $attribute_details->getSource()->getAllOptions(false);
+?>
+<div>
+    <div class="module-box">
+        <h2>By students, For students</h2>
+        <div class="box-heading module">ANSWERS OF TOP-RANKING STUDENTS</div>
+        <div class="std">Get access to the answers of previous year exam papers straight from the top-ranking students themselves! There's no stopping you now...</div>
+        <div class="clear"/>
+            <p/>
+        </div>
+        <!--<div class="qsearch">
+            <form action="<?php echo $this->getUrl('topper-answers.html') ?>" method="GET">
+                <p>
+                    <select name="<?php echo $university_attribute_code ?>" class="select-large">
+                        <option value="">Select your university</option>
+                      <?php
+                        foreach($universityOptions as $universityOption) 
+                        { 
+                            echo "<option value='{$universityOption['value']}'>{$universityOption['label']}</option>";      
+                        }
+                      ?>
+                    </select>
+                </p>
+                <p>
+                    <select name="<?php echo $degree_attribute_code ?>" class="select-large">
+                        <option value="">Select your degree</option>
+                      <?php
+                        foreach($degreeOptions as $degreeOption) 
+                        { 
+                            echo "<option value='{$degreeOption['value']}'>{$degreeOption['label']}</option>";      
+                        }
+                      ?>
+                    </select>
+                </p>
+                <p>
+                    <select name="<?php echo $semester_attribute_code ?>" class="select-large">
+                        <option value="">Select your degree semester/year</option>
+                      <?php
+                        foreach($semesterOptions as $semesterOption) 
+                        { 
+                            echo "<option value='{$semesterOption['value']}'>{$semesterOption['label']}</option>";      
+                        }
+                      ?>
+                    </select>
+                </p>
+                <p>
+                    <select name="<?php echo $subject_attribute_code ?>" class="select-large">
+                        <option value="">Select your subject</option>
+                      <?php
+                        foreach($subjectOptions as $subjectOption) 
+                        { 
+                            echo "<option value='{$subjectOption['value']}'>{$subjectOption['label']}</option>";      
+                        }
+                      ?>
+                    </select>
+                </p>
+                <button type="submit" class="button"><span>Search</span></button>
+                <p>or<br />
+                <a href="<?php echo $this->getUrl('topper-answers.html') ?>">browse all</a>
+                </p>
+            </form>
+        </div>-->
+        <div style="text-align: center;margin-top: 20px;"><h1 style="border-bottom: 0px;">Coming Soon</h1></div>
+    </div>
+</div>

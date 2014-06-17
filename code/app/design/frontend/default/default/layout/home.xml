@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+	
+	<layout version="0.1.0">
+		
+		<home_index_index> 
+			<reference name="root">
+				<action method="setTemplate"><template>page/1column.phtml</template></action>
+       	 	</reference>
+			<reference name="content">
+            	<block type="home/home" name="home" template="home/home.phtml"/>
+        	</reference>
+		</home_index_index>
+        <home_topperanswerpapers_index>
+            <reference name="root">
+				<action method="setTemplate"><template>page/1column.phtml</template></action>
+       	 	</reference>
+			<reference name="content">
+            	<block type="page/html" name="topperanswerpapers" template="home/topperanswerpapers.phtml"/>
+        	</reference>
+            <reference name="breadcrumbs">
+                <action method="addCrumb"><crumbName>Home</crumbName><crumbInfo><label>Home</label><title>Home</title><link>/</link></crumbInfo></action>
+                <action method="addCrumb"><crumbName>Topper Answers</crumbName><crumbInfo><label>Topper Answers</label><title>Topper Answers</title></crumbInfo></action>
+            </reference>
+        </home_topperanswerpapers_index>
+        <home_questionpapers_index>
+            <reference name="root">
+				<action method="setTemplate"><template>page/1column.phtml</template></action>
+       	 	</reference>
+			<reference name="content">
+            	<block type="page/html" name="questionpapers" template="home/questionpapers.phtml"/>
+        	</reference>
+            <reference name="breadcrumbs">
+                <action method="addCrumb"><crumbName>Home</crumbName><crumbInfo><label>Home</label><title>Home</title><link>/</link></crumbInfo></action>
+                <action method="addCrumb"><crumbName>Question Papers</crumbName><crumbInfo><label>Question Papers</label><title>Question Papers</title></crumbInfo></action>
+            </reference>
+        </home_questionpapers_index>
+		
+	</layout>

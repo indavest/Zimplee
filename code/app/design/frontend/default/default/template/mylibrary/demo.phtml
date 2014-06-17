@@ -1,0 +1,63 @@
+<?php
+	$session_id = json_decode(file_get_contents(Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB)."viewer/server/v1/session.php?docId=vCFqSRq68D"))->sessionId;
+?>
+<!DOCTYPE html>
+<html>
+    <head>
+    	<title>Zimplee Reader</title>
+		<link href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB); ?>viewer/css/ZM-viewer.css" type="text/css" rel="stylesheet">
+		<link href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB); ?>viewer/css/ZM-annotate.css" type="text/css" rel="stylesheet">
+		<!--link href="https://apis.docspad.com/v1/viewer/css/DP-viewer.css" type="text/css" rel="stylesheet"-->
+		<!--link href="https://apis.docspad.com/v1/viewer/css/DP-annotate.css" type="text/css" rel="stylesheet"-->
+    </head>
+    <body>
+	    <div class="DP-demo">
+	            <div class="DP-controls">
+	                <div class="DP-left">
+	                    <div class="DP-control DP-zoomOut"></div>
+	                    <div class="DP-control DP-zoomIn"></div>
+						<div class="DP-control DP-annotate"></div>
+	                </div>
+	                
+	                <div class="DP-center">
+	                    <div>
+	                        <div class="DP-control DP-previouspage"></div>
+	                        <div><input type="text" class="DP-pagenav" /></div>
+	                        <div class="DP-control DP-nextpage"></div>
+	                    </div>
+	                </div>
+	                    
+	                <div class="DP-right">
+	                    <a href="http://www.zimplee.com" target="_blank"><div class="DP-branding"></div></a>
+	                    <div class="DP-control DP-fullscreen"></div>
+	                </div>
+	                <h1 class="DP-clear"></h1>
+					<div class="DP-annotate-controls clearfix">
+	                    <div class="DP-control DP-highlight DP-corebtns" title="Highlight"></div>
+	                    <div class="DP-control DP-strike DP-corebtns" title="Strike Through"></div>
+	                    <div class="DP-control DP-hyperlink DP-corebtns" title="Hyperlink"></div>
+	                    <div class="DP-control DP-draw DP-corebtns" title="Free hand Drawing Tool"></div>
+						<div class="DP-control DP-comment DP-corebtns" title="Comment"></div>
+	                    <div style="float: left;margin-top: 13px;font-size: 25px;">|</div>
+	                    <div class="DP-colors DP-black DP-control"></div>
+	                    <div class="DP-colors DP-red DP-control"></div>
+	                    <div class="DP-colors DP-green DP-control"></div>
+	                    <div class="DP-colors DP-blue DP-control"></div>
+						<p style="float:left;font-size:10px;margin-top: 26px;margin-left: 5px;">* Annotations may or may not work</p>
+	                </div>
+	            </div>
+	            <div class="DP-errorinfo"></div>
+	            <div class="DP-viewer DP-reset" id="demo-viewer"></div>
+	        </div>
+		<script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		<script type="text/javascript" src="https://apis.docspad.com/v1/viewer/js/DP-coreviewer-v1.4.min.js"></script>
+		<script type="text/javascript" src="https://apis.docspad.com/v1/viewer/js/DP-coreannotate-v1.1.min.js"></script>
+		<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB); ?>viewer/js/viewer.js"></script>
+		<script type="text/javascript">
+		    var baseUrl = '<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB); ?>';
+		    var session_id = "<?php echo $session_id;?>";
+		    var customer_id = "<?php echo Mage::registry('customer_id'); ?>";
+		</script>
+    </body>
+</html>

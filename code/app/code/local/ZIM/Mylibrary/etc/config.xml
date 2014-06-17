@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<config> 
+	<global>
+		<modules>
+                <zim_mylibrary>
+                        <version>0.1.0</version>
+                </zim_mylibrary>
+        </modules>
+		
+		 <blocks>
+            <mylibrary>
+                <rewrite>						
+						<mylibrary>ZIM_Mylibrary_Block_Mylibrary</mylibrary>
+				</rewrite>
+            </mylibrary>
+		</blocks> 
+		<models>
+            <mylibrary>
+                <class>ZIM_Mylibrary_Model</class>
+                <resourceModel>mylibrary_mysql4</resourceModel>
+            </mylibrary>
+            <mylibrary_mysql4>
+                <class>ZIM_Mylibrary_Model_Mysql4</class>
+                <entities>
+                    <mylibrary>
+                        <table>mylibrary</table>
+                    </mylibrary>
+		        </entities>
+            </mylibrary_mysql4>
+        </models>
+	</global>	
+		 <frontend>
+                <routers>
+                        <mylibrary> 
+                                <use>standard</use>
+                                <args>
+                                        <module>ZIM_Mylibrary</module>
+                                        <frontName>mylibrary</frontName>
+                                </args>
+                        </mylibrary>
+                </routers>
+				<layout>
+					<updates>
+						<mylibrary>
+							<file>mylibrary.xml</file>
+						</mylibrary>
+					</updates>
+				</layout>
+        </frontend>
+		
+</config>

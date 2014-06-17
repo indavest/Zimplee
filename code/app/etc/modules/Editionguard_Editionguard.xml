@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * EditionGuard
+ *
+ * This source file is proprietary property of EditionGuard. Any reuse or
+ * distribution of any part of this file without prior consent is prohibited.
+ *
+ * @category    EditionGuard
+ * @package     Editionguard_Editionguard
+ * @copyright   Copyright (c) 2012 EditionGuard. All rights Reserved.
+ */
+-->
+<config>
+    <modules>
+        <Editionguard_Editionguard>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Editionguard_Editionguard>
+    </modules>
+</config>

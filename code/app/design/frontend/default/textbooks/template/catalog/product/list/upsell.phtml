@@ -1,0 +1,94 @@
+<?php if(count($this->getItemCollection()->getItems())): ?>
+<h5 class="upsell-product-h5"><?php echo $this->__('Up-sell products') ?></h5>
+<div class="box-up-sell-wrapper">
+<div class="box-collateral box-up-sell clearfix">
+    <div class="slider">
+   
+    <?php $this->resetItemsIterator() ?>
+    <?php for($_i=0;$_i<$this->getRowCount();$_i++): ?>
+        
+        <?php for($_j=0;$_j<$this->getColumnCount();$_j++): ?>
+            <?php if($_product=$this->getIterableItem()): ?>
+            
+          
+<div class="item slide"> 
+
+<!-- box -->
+
+      <div class="box-product-item">
+
+<div class="view-first">
+
+<div class="view-content">
+
+<div class="image">
+    <?php include('view/labels.phtml')  ?>
+                        <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+			
+<a href="<?php echo $_product->getProductUrl() ?>">
+<img class="fade-image" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(217,300) ?>" alt="<?php echo $this->htmlEscape($_product->getName()) ?>">
+</a>
+</div>
+
+<div class="name">
+<a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>"><?php echo $this->htmlEscape($_product->getName()); ?></a>
+</div>
+
+<div class="price clearfix">
+<?php echo $this->getPriceHtml($_product, true) ?>
+</div>
+
+<div class="box-product-buttons clearfix">
+    <a onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')" class="buttons-cart"><?php echo $this->__('Add to cart') ?></a>
+    <a onclick="setLocation('<?php echo $this->getAddToWishlistUrl($_product) ?>')" class="buttons-wish" title="<?php echo $this->__('Add to Wishlist') ?>"></a>
+    <a onclick="setLocation('<?php echo $this->getAddToCompareUrl($_product) ?>')" class="buttons-compare" title="<?php echo $this->__('Add to Compare') ?>"></a>
+</div>
+
+</div>
+
+
+</div>
+</div>
+
+    
+      <!--/ box-->
+</div>
+
+            <?php else: ?>
+            
+            <?php endif; ?>
+        <?php endfor; ?>
+        
+    <?php endfor; ?>
+</div>
+
+</div>
+<div class="prev upsell-arrow"></div>
+<div class="next upsell-arrow"></div>
+</div>
+<?php if(count($this->getItemCollection()->getItems()) > 1): ?>
+        <script type="text/javascript">
+            jQuery('.upsell-arrow.prev').addClass('disabled');
+            jQuery('.box-up-sell').iosSlider({
+                desktopClickDrag: true,
+                snapToChildren: true,
+                infiniteSlider: false,
+                navNextSelector: '.upsell-arrow.next',
+                navPrevSelector: '.upsell-arrow.prev',
+      
+                onFirstSlideComplete: function(){
+                    jQuery('.upsell-arrow.prev').addClass('disabled');
+                },
+                onLastSlideComplete: function(){
+                    jQuery('.upsell-arrow.next').addClass('disabled');
+                },
+                onSlideChange: function(){
+                    jQuery('.upsell-arrow.prev').removeClass('disabled');
+                    jQuery('.upsell-arrow.next').removeClass('disabled');
+                }
+            });               
+        </script>           
+    <?php endif; ?>  
+<?php endif ?>
+
+

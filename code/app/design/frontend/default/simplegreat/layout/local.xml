@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+
+<catalog_category_view>     
+     <reference name="head">
+	     <!--<action method="addItem">
+          <type>skin_js</type><script>js/jquery-latest.min.js</script>
+         </action>
+	     <action method="addItem">
+          <type>skin_js</type><script>js/jquery.scroll.min.js</script>
+         </action>
+         <action method="addItem">
+          <type>skin_css</type><script>css/scrollbar.css</script>
+       </action>-->
+	 </reference>	 
+</catalog_category_view>
+
+</layout>

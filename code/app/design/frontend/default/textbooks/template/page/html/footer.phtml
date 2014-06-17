@@ -1,0 +1,67 @@
+<?php if(themeOptions('twittername')<>''): ?>
+<div class="twitter-posts">
+   <script type="text/javascript">
+jQuery(document).ready(function($){
+ 
+ jQuery('#twitter_update_list').tweet({
+ modpath: '<?php echo $this->getJsUrl('twitter/'); ?>',
+ count: 3,
+ username: '<?php echo themeOptions('twittername') ?>',
+ template: "<img src='<?php echo $this->getSkinUrl('images/twitter-quote.png'); ?>'>{text}<span class='created'>{time}</span>",
+ loading_text: '<?php echo $this->__('Loading...') ?>'
+
+});
+ 
+ $('.twitter-posts .bxslider ul').bxSlider({
+	    mode: 'vertical',
+            auto: true,
+	    controls: false,
+            pager: false
+      });
+
+
+
+});
+</script>
+    <ul id="twitter_update_list" class="bxslider"></ul>
+    <div class="follow-link"><a href="http://twitter.com/<?php echo themeOptions('twittername') ?>/"><?php echo $this->__('Follow us on Twitter') ?></a></div>
+</div>
+<?php endif; ?>
+<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_social_icons')->toHtml(); ?>
+</div><?php // div .page end ?>
+</div>
+ 
+    <div class="footer-wrapper">
+	  <div class="footer-container">
+		<div class="additional-footer">			
+		  <!-- simplegreat footer -->
+		   <div id="footer">
+			<?php if(themeOptions('topbtn')): ?>                    
+							<div id="message"><a href="#top" id="top-link"></a></div> 
+						<?php endif; ?>
+	        <!-- columns -->
+	        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_menu')->toHtml(); ?>	   
+	        </div>			
+			<!--<div class="seo">
+			  <?//php echo $this->getLayout()->createBlock('cms/block')->setBlockId('seo')->toHtml(); ?>
+			</div>-->		
+	    </div>
+		<!-- / simplegreat footer -->
+		<div class="footer">
+        <?php echo $this->getChildHtml('bottomContainer') ?>
+		<div class="footer-top">
+		  <div class="seo">
+			  <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('seo')->toHtml(); ?>
+			</div>
+		</div>
+        <div class="footer-left">        
+	        <!--<?//php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_links')->toHtml(); ?>-->
+            <?php echo $this->getCopyright() ?>
+        </div>
+        <div class="footer-right">
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_payment_icons')->toHtml(); ?>
+        </div>
+        </div>
+	</div>    
+   </div>
+ <div class="page">
