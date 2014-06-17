@@ -1,0 +1,293 @@
+/* 
+    Document   : ZM-annotate.css
+    Author     : Prasad.CH
+    Created on : Mar 26, 2014, 1:16:00 PM
+    Description: Zimplee Annotate CSS
+*/
+#highlightMenu{
+    width: 105px;
+    font-size: 10px;
+    position: absolute;
+    background: #232323;
+    color: white;
+    z-index: 1000;
+    display: none;
+}
+
+#highlightMenu div{
+    padding: 5px 10px 5px 10px;
+}
+
+#strikeMenu{
+    width: 105px;
+    font-size: 10px;
+    position: absolute;
+    background: #232323;
+    color: white;
+    z-index: 1000;
+    display: none;
+}
+
+#strikeMenu div{
+    padding: 5px 10px 5px 10px;
+}
+
+#hyperlinkMenu{
+    width: 105px;
+    font-size: 10px;
+    position: absolute;
+    background: #232323;
+    color: white;
+    z-index: 1000;
+    display: none;
+}
+
+#hyperlinkMenu div{
+    padding: 5px 10px 5px 10px;
+}
+
+#hyperlinkInfo{
+    position: absolute;
+    z-index: 1000;
+    display: none;
+}
+
+#hyperlinkInfo button{
+    background: #0094C0;
+    padding: 0px;
+    color: #f0f0f0;
+    margin-left: 5px;
+}
+
+#hyperlinkInfo input{
+    border: 1px solid #BDC3C7;
+    border-radius: 3px;
+    padding: 3px 5px 3px 5px;
+}
+
+#drawingMenu{
+    width: 105px;
+    font-size: 10px;
+    position: absolute;
+    background: #232323;
+    color: white;
+    z-index: 1000;
+    display: none;
+}
+
+#drawingMenu div{
+    padding: 5px 10px 5px 10px;
+}
+
+#drawingCompleteUI{
+    font-size: 10px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    color: white;
+    z-index: 1000;
+    display: none;
+}
+
+#drawingCompleteUI button{
+    background: #0094C0;
+    padding: 0px;
+    color: #f0f0f0;
+    margin-left: 5px;
+}
+
+
+#pointCommentMenu{
+    width: 150px;
+    font-size: 10px;
+    position: absolute;
+    background: black;
+    color: white;
+    z-index: 1000;
+    display: none;
+}
+
+#pointCommentMenu div{
+    padding: 5px 10px 5px 10px;
+}
+
+
+.DP-drawing{
+    position: relative;
+    z-index: 999;
+    width: 102%;
+    height: 100%;
+    background: transparent;
+    pointer-events: none;
+}
+
+.DP-drawing .DP-path{
+    pointer-events: auto !important;
+}
+
+.DP-drawing-bbox{
+    position: absolute;
+    pointer-events: none;
+    border: 1px dashed gray;
+}
+
+.DP-commentboxcontainer{
+    width: 15%;
+    position: absolute;
+    left: 100%;
+    height: 100%;
+    top: 0px;
+}
+
+.DP-commentbox{
+    position: absolute;
+    left: 13%;
+    width: 80%;
+    border: 1px solid #0094C0;
+    background: #f0f0f0;
+    height: 40px;
+    min-height: 40px;
+    padding: 5px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    word-break: break-all;
+    z-index: 999;
+}
+
+.DP-commenthandle{
+    pointer-events: auto !important;
+}
+
+[contenteditable="true"]:focus > style{
+    border: 3px solid black;
+}
+
+svg{ 
+    height: 100%;
+    width: 100%;
+}
+
+.pf{
+    overflow: visible !important;
+}
+
+/* annotate controls */
+
+.DP-controls .DP-annotate{
+    width: 24px;
+    height: 24px;
+    background: url("../img/DPReaderIcons.png") 168px 0;
+}
+
+.DP-controls .DP-annotate-controls{
+    width: 100%;
+    position: relative;
+    background: #BDC3C7;
+    z-index: 1001;
+    display: none;
+}
+
+.DP-controls .DP-annotate-controls .DP-colors{
+    border-radius: 15px;
+    width: 18px;
+    height: 18px;
+    display: none;
+}
+
+.DP-controls .DP-annotate-controls .DP-green{
+    background: green;
+}
+
+.DP-controls .DP-annotate-controls .DP-black{
+    background: #232323;
+}
+
+.DP-controls .DP-annotate-controls .DP-blue{
+    background: #0094C0;
+}
+
+.DP-controls .DP-annotate-controls .DP-red{
+    background: red;
+}
+
+.DP-controls .DP-annotate-controls > div{
+    margin-left: 10px;
+}
+
+.DP-controls .DP-annotate-controls .DP-highlight{
+    width: 18px;
+    height: 18px;
+    background: url("../img/DPAnnotateIcons.png") 90px 0;
+}
+
+.DP-controls .DP-annotate-controls .DP-hyperlink{
+    width: 18px;
+    height: 18px;
+    background: url("../img/DPAnnotateIcons.png") 36px 0;
+}
+
+.DP-controls .DP-annotate-controls .DP-strike{
+    width: 18px;
+    height: 18px;
+    background: url("../img/DPAnnotateIcons.png") 54px 0;
+}
+
+.DP-controls .DP-annotate-controls .DP-draw{
+    width: 18px;
+    height: 18px;
+    background: url("../img/DPAnnotateIcons.png") 108px 0;
+}
+
+.DP-controls .DP-annotate-controls .DP-comment{
+    width: 18px;
+    height: 18px;
+    background: url("../img/DPAnnotateIcons.png") 0px 0;
+}
+
+.DP-separator{
+    display: none;
+}
+
+.striked{
+    color: red;
+}
+
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+.clearfix:after {
+  clear: both;
+}
+
+
+/*** CUSTOM CODE ***/
+.DP-remove-menus{
+	cursor: pointer;
+}
+.DP-controls .DP-annotate{
+    background: url("../img/ZMReaderIcons.png") 168px 0;
+}
+/*.DP-controls .DP-annotate-controls .DP-highlight{
+    background: url("../img/ZMAnnotateIcons.png") 90px 0;
+}
+
+.DP-controls .DP-annotate-controls .DP-hyperlink{
+    background: url("../img/ZMAnnotateIcons.png") 36px 0;
+}
+
+.DP-controls .DP-annotate-controls .DP-strike{
+    background: url("../img/ZMAnnotateIcons.png") 54px 0;
+}
+
+.DP-controls .DP-annotate-controls .DP-draw{
+    background: url("../img/ZMAnnotateIcons.png") 108px 0;
+}
+
+.DP-controls .DP-annotate-controls .DP-comment{
+    background: url("../img/ZMAnnotateIcons.png") 0px 0;
+}*/
